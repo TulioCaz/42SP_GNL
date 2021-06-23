@@ -6,7 +6,7 @@
 /*   By: tuliokaaz <tuliokaaz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:55:43 by tuliokaaz         #+#    #+#             */
-/*   Updated: 2021/06/23 18:22:50 by tuliokaaz        ###   ########.fr       */
+/*   Updated: 2021/06/23 18:50:40 by tuliokaaz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*ft_strjoin(char const *str1, char const *str2)
 	return (str);
 }
 
-char	*ft_strdup(char *str)
+char	*ft_strdup(char const *str)
 {
 	size_t	len;
 	void	*new;
