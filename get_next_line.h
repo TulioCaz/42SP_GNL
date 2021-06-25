@@ -6,17 +6,17 @@
 /*   By: tuliokaaz <tuliokaaz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:56:03 by tuliokaaz         #+#    #+#             */
-/*   Updated: 2021/06/25 14:42:45 by tuliokaaz        ###   ########.fr       */
+/*   Updated: 2021/06/25 15:50:38 by tuliokaaz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
 
-# define GET_NEXT_LINE_H
 # define MAX_FD 1024 + 1
 
 # define _ERROR -1
