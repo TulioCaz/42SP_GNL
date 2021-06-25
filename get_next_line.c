@@ -6,16 +6,16 @@
 /*   By: tuliokaaz <tuliokaaz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:49:38 by tuliokaaz         #+#    #+#             */
-/*   Updated: 2021/06/25 15:57:35 by tuliokaaz        ###   ########.fr       */
+/*   Updated: 2021/06/25 20:32:55 by tuliokaaz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-int	find_end_line(char *str)
+static int	find_end_line(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -29,7 +29,7 @@ int	find_end_line(char *str)
 	return (0);
 }
 
-char	*get_line(char *str)
+static char	*get_line(char *str)
 {
 	int		i;
 	char	*buff;
@@ -39,7 +39,8 @@ char	*get_line(char *str)
 		return (NULL);
 	while (str[i] && str[i] != '\n')
 		i++;
-	if (!(buff = malloc(sizeof(char) * (i + 1))))
+	buff = malloc(sizeof(char) * (i + 1));
+	if (!buff)
 		return (NULL);
 	i = 0;
 	while (str[i] && str[i] != '\n')
@@ -51,7 +52,7 @@ char	*get_line(char *str)
 	return (buff);
 }
 
-char	*get_save(char *save)
+static char	*get_save(char *save)
 {
 	char	*tmp;
 	int		i;
@@ -63,12 +64,13 @@ char	*get_save(char *save)
 		return (NULL);
 	while (save[i] && save[i] != '\n')
 		i++;
-	if(!save[i])
+	if (!save[i])
 	{
 		free(save);
 		return (NULL);
 	}
-	if (!(tmp = malloc(sizeof(char) * ((ft_strlen(save) - i) + 1))))
+	tmp = malloc(sizeof(char) * ((ft_strlen(save) - i) + 1));
+	if (!tmp)
 		return (NULL);
 	i++;
 	while (save[i])
@@ -78,28 +80,41 @@ char	*get_save(char *save)
 	return (tmp);
 }
 
+int	is_valid(int fd, char **line, char *buffer)
+{
+	if (!line || BUFFER_SIZE <= 0)
+		return (_ERROR);
+	else if (fd < 0 || fd > MAX_FD)
+		return (_ERROR);
+	else if (BUFFER_SIZE <= 0)
+		return (_ERROR);
+	else if (!buffer)
+		return (_ERROR);
+	return (1);
+}
+
 int	get_next_line(int fd, char **line)
 {
 	static char	*saved;
-	char		*tmp;
+	char		*buffer;
 	int			bytes_read;
 
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (is_valid(fd, line, buffer) == -1)
+		return (_ERROR);
 	bytes_read = 1;
-	if (!line || (fd < 0 || fd > MAX_FD) || BUFFER_SIZE <= 0)
-		return (_ERROR);
-	if (!(tmp = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
-		return (_ERROR);
 	while (!find_end_line(saved) && bytes_read != 0)
 	{
-		if ((bytes_read = read(fd, tmp, BUFFER_SIZE)) == -1)
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read == -1)
 		{
-			free(tmp);
+			free(buffer);
 			return (_ERROR);
 		}
-		tmp[bytes_read] = '\0';
-		saved = ft_strjoin(saved, tmp);
+		buffer[bytes_read] = '\0';
+		saved = ft_strjoin(saved, buffer);
 	}
-	free(tmp);
+	free(buffer);
 	*line = get_line(saved);
 	saved = get_save(saved);
 	if (bytes_read == 0)

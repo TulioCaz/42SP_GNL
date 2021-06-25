@@ -6,7 +6,7 @@
 /*   By: tuliokaaz <tuliokaaz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:55:43 by tuliokaaz         #+#    #+#             */
-/*   Updated: 2021/06/24 18:50:34 by tuliokaaz        ###   ########.fr       */
+/*   Updated: 2021/06/25 20:12:56 by tuliokaaz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,6 @@ void	*ft_memmove(void *dst, const void *src, size_t n)
 	while (n--)
 		*--d = *--s;
 	return (dst);
-}
-
-char	*ft_strchr(char const *str, int c)
-{
-	char	*s;
-
-	s = (char *) str;
-	while (*s)
-	{
-		if (*s == (char)c)
-			return (s);
-		s++;
-	}
-	if (*s == '\0' && c == '\0')
-		return (s);
-	return (NULL);
 }
 
 char	*ft_strjoin(char const *str1, char const *str2)
