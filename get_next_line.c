@@ -6,7 +6,7 @@
 /*   By: tuliokaaz <tuliokaaz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:49:38 by tuliokaaz         #+#    #+#             */
-/*   Updated: 2021/06/25 14:51:55 by tuliokaaz        ###   ########.fr       */
+/*   Updated: 2021/06/25 15:57:35 by tuliokaaz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	get_next_line(int fd, char **line)
 	char		*tmp;
 	int			bytes_read;
 
+	bytes_read = 1;
 	if (!line || (fd < 0 || fd > MAX_FD) || BUFFER_SIZE <= 0)
 		return (_ERROR);
 	if (!(tmp = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
