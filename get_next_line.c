@@ -89,7 +89,10 @@ int	is_valid(int fd, char **line, char *buffer)
 	else if (BUFFER_SIZE <= 0)
 		return (_ERROR);
 	else if (!buffer)
+	{
+		free(buffer);
 		return (_ERROR);
+	}
 	return (1);
 }
 
