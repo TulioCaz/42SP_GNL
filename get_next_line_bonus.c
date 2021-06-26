@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tuliokaaz <tuliokaaz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:49:38 by tuliokaaz         #+#    #+#             */
-/*   Updated: 2021/06/26 15:15:20 by tuliokaaz        ###   ########.fr       */
+/*   Updated: 2021/06/26 15:13:59 by tuliokaaz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	is_valid(int fd, char **line, char *buff)
 
 int	get_next_line(int fd, char **line)
 {
-	static char	*saved;
+	static char	*saved[MAX_FD];
 	char		*buffer;
 	int			bytes_read;
 
@@ -115,7 +115,7 @@ int	get_next_line(int fd, char **line)
 	if (is_valid(fd, line, buffer) == -1)
 		return (_ERROR);
 	bytes_read = 1;
-	while (!find_end_line(saved) && bytes_read != 0)
+	while (!find_end_line(saved[fd]) && bytes_read != 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
@@ -124,11 +124,11 @@ int	get_next_line(int fd, char **line)
 			return (_ERROR);
 		}
 		buffer[bytes_read] = '\0';
-		saved = ft_strjoin(saved, buffer);
+		saved[fd] = ft_strjoin(saved[fd], buffer);
 	}
 	free(buffer);
-	*line = get_line(saved);
-	saved = get_save(saved);
+	*line = get_line(saved[fd]);
+	saved[fd] = get_save(saved[fd]);
 	if (bytes_read == 0)
 		return (_EOF);
 	return (_A_LINE);
