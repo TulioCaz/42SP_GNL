@@ -17,7 +17,7 @@
 #  define BUFFER_SIZE 42
 # endif
 
-# define MAX_FD 1025
+# define MAX_FD 1024
 
 # define _ERROR -1
 # define _EOF 0
