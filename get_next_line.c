@@ -6,7 +6,7 @@
 /*   By: tuliokaaz <tuliokaaz@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 16:49:38 by tuliokaaz         #+#    #+#             */
-/*   Updated: 2021/06/25 20:32:55 by tuliokaaz        ###   ########.fr       */
+/*   Updated: 2021/06/26 10:53:42 by tuliokaaz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,25 @@ static char	*get_save(char *save)
 int	is_valid(int fd, char **line, char *buffer)
 {
 	if (!line || BUFFER_SIZE <= 0)
+	{
+		free(buffer);
 		return (_ERROR);
+	}
 	else if (fd < 0 || fd > MAX_FD)
 	{
 		free(buffer);
 		return (_ERROR);
 	}
 	else if (BUFFER_SIZE <= 0)
+	{
+		free(buffer);
 		return (_ERROR);
+	}
 	else if (!buffer)
+	{
+		free(buffer);
 		return (_ERROR);
+	}
 	return (1);
 }
 
