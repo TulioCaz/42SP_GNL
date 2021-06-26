@@ -85,14 +85,14 @@ int	is_valid(int fd, char **line, char *buffer)
 	if (!line || BUFFER_SIZE <= 0)
 		return (_ERROR);
 	else if (fd < 0 || fd > MAX_FD)
-		return (_ERROR);
-	else if (BUFFER_SIZE <= 0)
-		return (_ERROR);
-	else if (!buffer)
 	{
 		free(buffer);
 		return (_ERROR);
 	}
+	else if (BUFFER_SIZE <= 0)
+		return (_ERROR);
+	else if (!buffer)
+		return (_ERROR);
 	return (1);
 }
 
