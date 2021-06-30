@@ -1,6 +1,7 @@
 # Get Next Line
 
 Get_next_line (42São Paulo) 2021. Este projeto consiste basicamente em uma função que lê um arquivo linha por linha.
+
 *Observação: Existem muitos métodos mais fáceis de fazer isso usando funções C padrão. Mas o objetivo aqui é poder fazer isso usando apenas as funções padrão `read`, `malloc` e `free`.*
 
 ## Manual
